@@ -2,7 +2,6 @@ import os
 import subprocess
 import platform
 import webbrowser
-from setuptools import setup
 
 
 def ssh_key_exists():
