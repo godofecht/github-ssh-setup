@@ -9,7 +9,10 @@ def ssh_key_exists():
 
 
 def generate_ssh_key(email):
-    key_path = os.path.expanduser("~/.ssh/id_ed25519")
+    ssh_dir = os.path.expanduser("~/.ssh")
+    # ssh-keygen cannot create this folder itself, and a new machine may not have it.
+    os.makedirs(ssh_dir, mode=0o700, exist_ok=True)
+    key_path = os.path.join(ssh_dir, "id_ed25519")
     subprocess.run(["ssh-keygen", "-t", "ed25519", "-C", email, "-f", key_path, "-N", ""], check=True)
     print("SSH key generated successfully.")
 
